@@ -190,6 +190,7 @@
                  <span class="post-meta-item-text">{{__('post.visitors')}}&#58;</span>
                {% endif %}
                  <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
              </span>
           {% endif %}
 
@@ -215,6 +216,7 @@
                 <span title="{{ __('post.wordcount') }}">
                   {{ wordcount(post.content) }}
                 </span>
+                <span>字</span>
               {% endif %}
 
               {% if theme.post_wordcount.wordcount and theme.post_wordcount.min2read %}
@@ -231,6 +233,7 @@
                 <span title="{{ __('post.min2read') }}">
                   {{ min2read(post.content) }}
                 </span>
+                <span>分钟</span>
               {% endif %}
             </div>
           {% endif %}
@@ -313,7 +316,6 @@
     {#####################}
     {### END POST BODY ###}
     {#####################}
-
     {% if theme.wechat_subscriber.enabled and not is_index %}
       <div>
         {% include 'wechat-subscriber.swig' %}
@@ -328,7 +330,9 @@
 
     {% if theme.post_copyright.enable and not is_index %}
       <div>
-        {% include 'post-copyright.swig' with { post: post } %}
+       {% include 'my-copyright.swig' %}
+       <!-- include 'post-copyright.swig' with { post: post } -->
+
       </div>
     {% endif %}
 
@@ -336,7 +340,7 @@
       {% if post.tags and post.tags.length and not is_index %}
         <div class="post-tags">
           {% for tag in post.tags %}
-            <a href="{{ url_for(tag.path) }}" rel="tag"># {{ tag.name }}</a>
+            <a href="{{ url_for(tag.path) }}" <i class="fa fa-tag"></i> {{ tag.name }}</a>
           {% endfor %}
         </div>
       {% endif %}
